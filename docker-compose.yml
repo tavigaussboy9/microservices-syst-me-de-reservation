@@ -5,36 +5,36 @@ services:
     build:
       context: ./event-service
     ports:
-      - '3001:3001'
+      - '3001:3001'  # Module de gestion des événements
     depends_on:
-      - mongo
+      - mongo  # Dépend de la base de données MongoDB
 
   user-service:
     build:
       context: ./user-service
     ports:
-      - '3002:3002'
+      - '3002:3002'  # Module de gestion des utilisateurs
     depends_on:
-      - mongo
+      - mongo  # Dépend de la base de données MongoDB
 
   payment-service:
     build:
       context: ./payment-service
     ports:
-      - '3003:3003'
+      - '3003:3003'  # Module de gestion des paiements
     depends_on:
-      - mongo
+      - mongo  # Dépend de la base de données MongoDB
 
   notification-service:
     build:
       context: ./notification-service
     ports:
-      - '3004:3004'
+      - '3004:3004'  # Module de gestion des notifications
 
   mongo:
-    image: mongo:latest
+    image: mongo:latest  # Image Docker pour MongoDB
     volumes:
-      - mongo-data:/data/db
+      - mongo-data:/data/db  # Stockage persistant pour les données MongoDB
 
 volumes:
-  mongo-data:
+  mongo-data:  # Volume pour le stockage des données MongoDB
