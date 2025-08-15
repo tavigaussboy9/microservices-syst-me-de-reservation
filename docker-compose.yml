@@ -10,6 +10,11 @@ services:
       - mongo  # Dépend de la base de données MongoDB
     networks:
       - app-network
+    healthcheck:
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:3001/health' ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   user-service:
     build:
@@ -20,6 +25,11 @@ services:
       - mongo  # Dépend de la base de données MongoDB
     networks:
       - app-network
+    healthcheck:
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:3002/health' ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   payment-service:
     build:
@@ -30,6 +40,11 @@ services:
       - mongo  # Dépend de la base de données MongoDB
     networks:
       - app-network
+    healthcheck:
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:3003/health' ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   notification-service:
     build:
@@ -38,6 +53,11 @@ services:
       - '3004:3004'  # Module de gestion des notifications
     networks:
       - app-network
+    healthcheck:
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:3004/health' ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   mongo:
     image: mongo:latest  # Image Docker pour MongoDB
