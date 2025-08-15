@@ -8,6 +8,8 @@ services:
       - '3001:3001'  # Module de gestion des événements
     depends_on:
       - mongo  # Dépend de la base de données MongoDB
+    networks:
+      - app-network
 
   user-service:
     build:
@@ -16,6 +18,8 @@ services:
       - '3002:3002'  # Module de gestion des utilisateurs
     depends_on:
       - mongo  # Dépend de la base de données MongoDB
+    networks:
+      - app-network
 
   payment-service:
     build:
@@ -24,17 +28,26 @@ services:
       - '3003:3003'  # Module de gestion des paiements
     depends_on:
       - mongo  # Dépend de la base de données MongoDB
+    networks:
+      - app-network
 
   notification-service:
     build:
       context: ./notification-service
     ports:
       - '3004:3004'  # Module de gestion des notifications
+    networks:
+      - app-network
 
   mongo:
     image: mongo:latest  # Image Docker pour MongoDB
     volumes:
       - mongo-data:/data/db  # Stockage persistant pour les données MongoDB
+    networks:
+      - app-network
 
 volumes:
   mongo-data:  # Volume pour le stockage des données MongoDB
+
+networks:
+  app-network:  # Réseau pour la communication entre les services
