@@ -1,3 +1,4 @@
+# Ce fichier .gitignore exclut les fichiers et répertoires suivants du suivi Git
 node_modules/
 .env
 Dockerfile
