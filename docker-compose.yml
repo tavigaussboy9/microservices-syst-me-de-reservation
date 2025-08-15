@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  event-service:
+    build:
+      context: ./event-service
+    ports:
+      - '3001:3001'
+    depends_on:
+      - mongo
+
+  user-service:
+    build:
+      context: ./user-service
+    ports:
+      - '3002:3002'
+    depends_on:
+      - mongo
+
+  payment-service:
+    build:
+      context: ./payment-service
+    ports:
+      - '3003:3003'
+    depends_on:
+      - mongo
+
+  notification-service:
+    build:
+      context: ./notification-service
+    ports:
+      - '3004:3004'
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
